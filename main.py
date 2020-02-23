@@ -1,8 +1,7 @@
-from datastructures.trie import Trie
+from loading.loader import Loader
 
 if __name__ == '__main__':
-    trie = Trie()
-    trie.insert('rec','putanja')
-    trie.insert('rec2','putanja')
-    trie.insert('rec2','putanja2')
-    print(trie.find('rec2'))
+    loader = Loader('python-2.7.7-docs-html')
+    loader.load_data()
+    trie = loader.get_trie()
+    print(trie.find('python'))
