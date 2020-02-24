@@ -1,10 +1,12 @@
 from datastructures.trie import Trie
 from datastructures.graph import Graph
+from datastructures.set import Set
 from loading.parser import Parser
 
 
 import os
 import time
+
 
 class Loader:
 
@@ -29,7 +31,7 @@ class Loader:
         start_time = time.time()
         filesystem_walk(self.path, parser, edge_list, trie)
         print("\n\nParsiranje za: %s sekundi." % (time.time() - start_time))
-        all_vertex = set()
+        all_vertex = Set()
         for e in edge_list:
             all_vertex.add(e[0])
             all_vertex.add(e[1])
