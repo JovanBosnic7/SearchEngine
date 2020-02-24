@@ -1,5 +1,6 @@
 from loading.loader import Loader
 from datastructures.set import Set
+import os
 
 
 def validate(user_input):
@@ -71,17 +72,32 @@ def search(search_string):
 
 
 if __name__ == '__main__':
-    loader = Loader('python-2.7.7-docs-html')
-    graph, trie = loader.load_data()
-    ret_val = search('set')
-    print(len(ret_val))
-    ret_val2 = search('library')
-    print(len(ret_val2))
-    ret_val3 = search('set not library')
-    print(len(ret_val3))
-    ret_val4 = search('library not set')
-    print(len(ret_val4))
-    ret_val5 = search('set or library')
-    print(len(ret_val5))
-    ret_val6 = search('set and library')
-    print(len(ret_val6))
+    while True:
+        path = os.path.abspath(input("Unesite putanju pocetnog direktorijuma za pretragu: "))
+        if os.path.exists(path) and os.path.isdir(path):
+            loader = Loader(path)
+            print("Tekuci direktorijum: \n{}".format(path))
+            graph, trie = loader.load_data()
+            break
+    while True:
+        print("\t1 - Prikazi tekuci direktorijum")
+        print("\t2 - Unesite rec za pretragu")
+        print("\t0 - Kraj programa")
+
+        try:
+            usr_input = int(input(">> "))
+        except ValueError:
+            print("Greska pri unosu!\n")
+            continue
+        except KeyboardInterrupt:
+            break
+        if usr_input == 1:
+            print(" -- " * 20)
+            print("Tekuci direktorijum: \n{}".format(path))
+            print(" -- " * 20)
+        elif usr_input == 2:
+            unos = input(">> ")
+            results = search(unos)
+        elif usr_input == 0:
+            print("Kraj...")
+            exit(0)
