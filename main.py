@@ -6,6 +6,7 @@ def validate(user_input):
     check = -1  # Provera -1 za pocetak, 0 za rec, 1 za operator
     valid = False
     len1 = len(input_list)
+    string_list = []
     if len1 > 0:
         valid = True
         i = 0
@@ -20,16 +21,20 @@ def validate(user_input):
                         valid = False  # Ako je prva rec unosa operator, unos nije validan
                         break
                     elif check == 0:
+                        string_list.append(word)
                         check = 1  # Ako je operatoru prethodila rec, zabelezava se da je unesen operator
                     else:
                         valid = False  # Ako je doslo do unosa dva operatora jednog za drugim, unos nije validan
                         break
             else:
-                if check == 1:
+                if check == 1 or check == -1:
+                    string_list.append(word)
                     check = 0 # Zabelezava se da je unesena rec
                 else:
+                    string_list.append('or')
                     check = 0  # Zabelezava se da je unesena rec
-    return valid
+    if valid:
+        return string_list
 
 
 def is_operator(string):
@@ -39,14 +44,15 @@ def is_operator(string):
         return False
 
 
+def search(search_string):
+    words = validate(search_string)
+    result_sets = {}
+    for word in words:
+        if not is_operator(word):
+            result_sets[word] = trie.find(word)
+
+
 if __name__ == '__main__':
     loader = Loader('python-2.7.7-docs-html')
     graph, trie = loader.load_data()
-    print(validate('python or class'))
-    print(validate('python class inherit'))
-    print(validate('python or class or recursion and flags'))
-    print(validate('python or or class'))
-    print(validate('python or and class'))
-    print(validate('python class and recursion'))
-    print(validate('python or class or'))
-    print(validate('or python or class'))
+    search('recursion and access')
