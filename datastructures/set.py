@@ -1,27 +1,48 @@
-
 class Set(object):
 
-    def __and__(self, dict1, dict2):
-        result_set = {}
-        for html in dict1.keys():
-            if html in dict2.keys():
-                result_set[html] = dict1[html] + dict2[html]
-        return result_set
+    def __init__(self, data=[]):
+        self.data = {}
+        for element in data:
+            self.data[element] = None
 
-    def __or__(self, dict1, dict2):
-        result_set=dict1
-        for html in dict2:
-            if html not in result_set:
-                result_set[html] = dict2[html]
-            else:
-                result_set[html] += dict2[html]
+    def add(self, other):
+        if other not in self.data:
+            self.data[other] = None
 
-        return result_set
+    def discard(self, other):
+        if other in self.data:
+            self.data.pop(other)
 
-    def __diff__ (self, dic1, dic2):
-        result_set = dic1
-        for html in dic2:
-            if html in result_set:
-                del result_set[html]
+    def __contains__(self, item):
+        if item in self.data:
+            return True
+        else:
+            return False
 
-        return result_set
+    def __len__(self):
+        return len(self.data)
+
+    def __iter__(self):
+        return self.data.__iter__()
+
+    def __and__(self, other):
+        result = Set()
+        for e in self:
+            if e in other:
+                result.add(e)
+        return result
+
+    def __or__(self, other):
+        result = Set()
+        for e in self:
+            result.add(e)
+        for e in other:
+            result.add(e)
+        return result
+
+    def __not__(self, other):
+        result = Set()
+        for e in self:
+            if e not in other:
+                result.add(e)
+        return result

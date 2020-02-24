@@ -1,4 +1,5 @@
 from datastructures.trie_node import TrieNode
+from datastructures.set import Set
 import os
 
 
@@ -39,5 +40,5 @@ class Trie:
             if key in curr_node.children:
                 curr_node = curr_node.children[key]
             else:
-                return dict()
-        return curr_node.counters
+                return Set()
+        return Set(curr_node.counters.keys())
