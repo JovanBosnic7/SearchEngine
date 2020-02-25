@@ -1,6 +1,7 @@
 from loading.loader import Loader
 from datastructures.set import Set
 from algorithms.rang import rang
+from algorithms.sort import sort
 import os
 
 
@@ -103,6 +104,24 @@ if __name__ == '__main__':
             results, words_rang = search(unos)
             if len(results) > 0:
                 rang_result = rang(graph, trie, results, words_rang)
+                list_rang_result = list(rang_result.items())
+                sort(list_rang_result, 0, len(list_rang_result) - 1)
+                while True:
+                    try:
+                        unos_dn = input("Da li zelite da prikazete rezultate? [D/N]: ")
+                    except KeyboardInterrupt:
+                        exit(0)
+
+                    if unos_dn == "D" or unos_dn == "d":
+                        print("Ukupan broj straniza iz pretrage [{}]".format(len(results)))
+                        for item in list_rang_result:
+                            print(item)
+                        break
+                    elif unos_dn == "N" or unos_dn == "n":
+                        break
+                    else:
+                        print("Pogresan unos!")
+
         elif usr_input == 0:
             print("Kraj...")
             exit(0)
