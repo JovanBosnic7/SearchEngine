@@ -2,6 +2,7 @@ from loading.loader import Loader
 from datastructures.set import Set
 from algorithms.rang import rang
 from algorithms.sort import sort
+from util.paginacija_rezultata import prikazi_rezultate
 import os
 
 
@@ -86,6 +87,7 @@ if __name__ == '__main__':
     while True:
         print("\t1 - Prikazi tekuci direktorijum")
         print("\t2 - Unesite rec za pretragu")
+        print("\t3 - Prikazi graph")
         print("\t0 - Kraj programa")
 
         try:
@@ -114,14 +116,26 @@ if __name__ == '__main__':
 
                     if unos_dn == "D" or unos_dn == "d":
                         print("Ukupan broj straniza iz pretrage [{}]".format(len(results)))
-                        for item in list_rang_result:
-                            print(item)
+                        try:
+                            N = int(input("Unesite broj HTML linkova po stranici prikaza (izlaz - bilo sta osim broja): "))
+                        except ValueError:
+                            print("Pogresan unos")
+                            break
+
+                        prikazi_rezultate(list_rang_result, N)
                         break
                     elif unos_dn == "N" or unos_dn == "n":
                         break
                     else:
                         print("Pogresan unos!")
-
+            else:
+                print("--" * 50)
+                print("Pretraga je neuspesna!")
+                print("--" * 50)
+        elif usr_input == 3:
+            print("--" * 80)
+            print(graph)
+            print("--" * 80)
         elif usr_input == 0:
             print("Kraj...")
             exit(0)
