@@ -1,5 +1,6 @@
 from loading.loader import Loader
 from datastructures.set import Set
+from algorithms.rang import rang
 import os
 
 
@@ -50,9 +51,11 @@ def is_operator(string):
 def search(search_string):
     words = validate(search_string)
     result_sets = {}
+    ret_words = []
     for word in words:
         if not is_operator(word):
             result_sets[word] = trie.find(word)
+            ret_words.append(word)
     result = Set()
     operator = None
     for word in words:
@@ -68,7 +71,7 @@ def search(search_string):
                     result = result.__or__(result_sets[word])
                 elif operator is None:
                     result = result_sets[word]
-    return result
+    return result, ret_words
 
 
 if __name__ == '__main__':
@@ -97,7 +100,9 @@ if __name__ == '__main__':
             print(" -- " * 20)
         elif usr_input == 2:
             unos = input(">> ")
-            results = search(unos)
+            results, words_rang = search(unos)
+            if len(results) > 0:
+                rang_result = rang(graph, trie, results, words_rang)
         elif usr_input == 0:
             print("Kraj...")
             exit(0)

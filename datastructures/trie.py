@@ -34,6 +34,15 @@ class Trie:
         except KeyError:
             curr_node.counters[ext_path] = 1
 
+    def get_counters(self, word):
+        curr_node = self.root
+        for letter in word:
+            if letter in curr_node.children:
+                curr_node = curr_node.children[letter]
+            else:
+                return 0
+        return curr_node.counters
+
     def find(self, word):
         curr_node = self.root
         for key in word:
