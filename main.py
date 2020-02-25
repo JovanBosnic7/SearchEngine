@@ -106,7 +106,7 @@ if __name__ == '__main__':
             print("--" * 70)
         elif usr_input == 2:
             unos = input(">> ")
-            results, words_rang = search(unos)
+            results, words_rang = search(unos.lower())
             if len(results) > 0:
                 rang_result = rang(graph, trie, results, words_rang)
                 list_rang_result = list(rang_result.items())

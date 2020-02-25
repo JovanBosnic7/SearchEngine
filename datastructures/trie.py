@@ -40,7 +40,7 @@ class Trie:
             if letter in curr_node.children:
                 curr_node = curr_node.children[letter]
             else:
-                return 0
+                return dict()
         return curr_node.counters
 
     def find(self, word):
