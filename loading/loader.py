@@ -49,6 +49,9 @@ class Loader:
 
         return graph, trie
 
+    def close_parser(self):
+        self.parser.close()
+
 
 def filesystem_walk(path, parser, edge_list, trie):
     for dic in os.listdir(path):

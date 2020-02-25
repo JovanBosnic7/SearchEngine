@@ -2,7 +2,7 @@ def prikazi_rezultate(list, N):
     i = 0
     n = N
     while True:
-        print(" -- " * 70)
+        print("--" * 70)
         print("HTML page" + " " * 100 + "RANG")
         for k in range(i*n, i*n+n):
             if k < len(list):

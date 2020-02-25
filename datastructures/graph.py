@@ -18,7 +18,7 @@ class Graph(object):
             list1 = self.odlazeci[key]
             list2 = self.dolazeci[key]
 
-            string += ("\n*" + str(key) + "out link = " + str(len(list1)) + "in link = " + str(len(list2)))
+            string += ("\n*" + str(key) + " out links = " + str(len(list1)) + " in links = " + str(len(list2)))
             string += "\n"
 
             for d in list1:

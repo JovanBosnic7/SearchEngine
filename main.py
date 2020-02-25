@@ -83,7 +83,10 @@ if __name__ == '__main__':
             loader = Loader(path)
             print("Tekuci direktorijum: \n{}".format(path))
             graph, trie = loader.load_data()
+            loader.close_parser()
             break
+        else:
+            print("Uneli ste neispravnu putanju!")
     while True:
         print("\t1 - Prikazi tekuci direktorijum")
         print("\t2 - Unesite rec za pretragu")
@@ -98,9 +101,9 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             break
         if usr_input == 1:
-            print(" -- " * 20)
+            print("--" * 70)
             print("Tekuci direktorijum: \n{}".format(path))
-            print(" -- " * 20)
+            print("--" * 70)
         elif usr_input == 2:
             unos = input(">> ")
             results, words_rang = search(unos)
@@ -129,13 +132,13 @@ if __name__ == '__main__':
                     else:
                         print("Pogresan unos!")
             else:
-                print("--" * 50)
+                print("--" * 70)
                 print("Pretraga je neuspesna!")
-                print("--" * 50)
+                print("--" * 70)
         elif usr_input == 3:
-            print("--" * 80)
+            print("--" * 70)
             print(graph)
-            print("--" * 80)
+            print("--" * 70)
         elif usr_input == 0:
             print("Kraj...")
             exit(0)
